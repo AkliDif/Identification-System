@@ -7,7 +7,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!isset($_POST['_token']) || $_POST['_token'] !== $_SESSION['_token']) {
         die('Token invalide');
     }
-    
 
     if (isset($_POST['connect'])) {
         connect_user($_POST['username'], $_POST['password']);

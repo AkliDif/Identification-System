@@ -89,3 +89,24 @@
     border: 1px solid transparent;
     border-radius: 4px;
 }
+
+.welcome-message {
+    font-size: xx-large;
+    color: #444;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+}
+
+.welcome-message-div {
+    margin-top: 200px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}

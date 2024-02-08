@@ -4,6 +4,12 @@ require_once('init.inc.php');
 
 function add_user($username, $password, $password_conf) {
 
+    if (valide_password($password) !== 0)
+    {
+        return;
+    }
+    
+
     if (empty($username) || empty($password) || empty($password_conf))
     {
         $_SESSION['input_data_error'] = 'The username and the passwords are required.';
@@ -42,6 +48,9 @@ function add_user($username, $password, $password_conf) {
 
     $statement->execute();
     $statement->closeCursor();
+    $_SESSION['username'] = $username;
+
+    header('Location: ../index.php');
 
     return 0; // user added
 }
@@ -65,7 +74,8 @@ function connect_user($username, $password)
     $statement->closeCursor();
     if ($user && password_verify($password, $user['password']))
     {
-        echo "Bienvenue " . $username;
+        $_SESSION['username'] = $username;
+        header('Location: ../connected.php');
     }
     else
     {
@@ -87,6 +97,37 @@ function get_user($username)
     return $user;
 }
 
-
-
-
+function valide_password($password)
+{
+    if (strlen($password) < 12)
+    {
+        $_SESSION['password_error'] = 'The password must be at least 12 characters long.';
+        header('Location: ../registration.php');
+        return 1;
+    }
+    if (!preg_match('/[A-Z]/', $password))
+    {
+        $_SESSION['password_error'] = 'The password must contain at least one uppercase letter.';
+        header('Location: ../registration.php');
+        return 2;
+    }
+    if (!preg_match('/[a-z]/', $password))
+    {
+        $_SESSION['password_error'] = 'The password must contain at least one lowercase letter.';
+        header('Location: ../registration.php');
+        return 3;
+    }
+    if (!preg_match('/[0-9]/', $password))
+    {
+        $_SESSION['password_error'] = 'The password must contain at least one number.';
+        header('Location: ../registration.php');
+        return 4;
+    }
+    if (!preg_match('/[^a-zA-Z0-9]/', $password))
+    {
+        $_SESSION['password_error'] = 'The password must contain at least one special character(!@#$%^&*).';
+        header('Location: ../registration.php');
+        return 5;
+    }
+    return 0;
+}

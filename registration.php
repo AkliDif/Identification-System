@@ -38,7 +38,13 @@
             
             <input type="submit" id="create_button" name="create" value="Create">
             <!-- to prevent crsf -->
-            <input type="hidden" name="_token" value="<?php echo $_SESSION['_token']; ?>">
+            <input type="hidden" name="_token" value="<?php
+                if (isset($_SESSION['_token'])): 
+                        echo $_SESSION['_token']; 
+                    else: 
+                        echo ''; // Replace 'default_value' with the value you want to use if _token is not set
+                    endif; 
+                ?>">
         </form>
     </div>
 </body>

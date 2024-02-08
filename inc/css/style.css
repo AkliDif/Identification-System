@@ -14,16 +14,14 @@
 {
     width: 80%;
     padding: 10px;
-    /* margin: 10px -10px; */
     border: 1px solid #e6e6e6;
     border-radius: 5px;
-    /* align this inputs in the center horizontaly */
     display: block;
     margin: 0 auto;
     margin-bottom: 20px;
 }
 
-.form input[type="submit"]
+.form input[type="submit"], .form input[type="button"], .form input[type="reset"]
 {
     width: 30%;
     padding: 10px;
@@ -34,19 +32,27 @@
     cursor: pointer;
 }
 
-.form input[type="submit"]:hover
+.form input[type="submit"]:hover, .form input[type="button"]:hover, .form input[type="reset"]:hover
 {
     background-color: #45a049;
 }
 
-.form input[type="submit"]:active
+.form input[type="submit"]:active, .form input[type="button"]:active, .form input[type="reset"]:active
 {
     background-color: #3e8e41;
 }
 
-.form input[type="submit"]:focus
+.form input[type="submit"]:focus, .form input[type="button"]:focus, .form input[type="reset"]:focus
 {
     outline: none;
+}
+
+/* center the button with id = create_button */
+
+#create_button
+{
+    display: block;
+    margin: 0 auto;
 }
 
 .buttons
@@ -71,4 +77,15 @@
     margin-bottom: 20px;
     border-radius: 50%;
     align-self: flex-start;
+}
+
+
+.error-message {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }

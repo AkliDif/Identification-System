@@ -1,5 +1,0 @@
-<Directory /var/www/html/inc>
-    AllowOverride All
-    Order allow,deny
-    Allow from all
-</Directory> 

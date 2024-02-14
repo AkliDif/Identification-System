@@ -19,7 +19,7 @@ if(!$pdo) {
 session_start();
  
 //--------- CHEMIN
-// define("RACINE_SITE","/identification_system/");
+define("RACINE_SITE","/var/www/html/");
  
 //--------- VARIABLES
 $contenu = '';

@@ -4,6 +4,13 @@ require_once('init.inc.php');
 
 function add_user($username, $password, $password_conf) {
 
+    if (empty($username) || empty($password) || empty($password_conf))
+    {
+        $_SESSION['input_data_error'] = 'Please fill in all the fields.';
+        // header('Location: ../registration.php');
+        return;
+    }
+
     if (valide_password($password) !== 0)
     {
         return;
@@ -13,7 +20,7 @@ function add_user($username, $password, $password_conf) {
     if (empty($username) || empty($password) || empty($password_conf))
     {
         $_SESSION['input_data_error'] = 'The username and the passwords are required.';
-        header('Location: ../registration.php');
+        // header('Location: ../registration.php');
         return;
     }
     global $pdo;
@@ -42,13 +49,12 @@ function add_user($username, $password, $password_conf) {
     {   
         $_SESSION['password_error'] = 'The passwords do not match.';
         // adding a delay to see the error message
-        header('Location: ../registration.php');
+        // header('Location: ../registration.php');
         return 2; // password and password_conf are different
     }
 
     $statement->execute();
     $statement->closeCursor();
-    $_SESSION['username'] = $username;
 
     header('Location: ../index.php');
 
@@ -61,7 +67,6 @@ function connect_user($username, $password)
     if (empty($username) || empty($password))
     {
         $_SESSION['input_data_error'] = 'The username and the password are required.';
-        header('Location: ../index.php');
         return;
     }
 
@@ -81,7 +86,6 @@ function connect_user($username, $password)
     {
         $_SESSION['password_error'] = ' The user doesn\'t exists or the passwords do not match.';
         sleep(3);
-        header('Location: ../index.php');
     }
 }
 
@@ -102,32 +106,42 @@ function valide_password($password)
     if (strlen($password) < 12)
     {
         $_SESSION['password_error'] = 'The password must be at least 12 characters long.';
-        header('Location: ../registration.php');
+        // header('Location: ../registration.php');
         return 1;
     }
     if (!preg_match('/[A-Z]/', $password))
     {
         $_SESSION['password_error'] = 'The password must contain at least one uppercase letter.';
-        header('Location: ../registration.php');
+        // header('Location: ../registration.php');
         return 2;
     }
     if (!preg_match('/[a-z]/', $password))
     {
         $_SESSION['password_error'] = 'The password must contain at least one lowercase letter.';
-        header('Location: ../registration.php');
+        // header('Location: ../registration.php');
         return 3;
     }
     if (!preg_match('/[0-9]/', $password))
     {
         $_SESSION['password_error'] = 'The password must contain at least one number.';
-        header('Location: ../registration.php');
+        // header('Location: ../registration.php');
         return 4;
     }
     if (!preg_match('/[^a-zA-Z0-9]/', $password))
     {
         $_SESSION['password_error'] = 'The password must contain at least one special character(!@#$%^&*).';
-        header('Location: ../registration.php');
+        // header('Location: ../registration.php');
         return 5;
     }
     return 0;
+}
+
+function user_connected()
+{
+    if (isset($_SESSION['username']))
+    {
+        echo ($_SESSION['username']);
+        return true;
+    }
+    return false;
 }

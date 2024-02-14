@@ -12,10 +12,15 @@ Le serveur utilisé dans ce projet est un serveur Apache. Il est configuré pour
 ### Client
 Le client est un site Web créer avec du HTML, du CSS et du PHP. Il permet à l'utilisateur de s'authentifier en envoyant ses identifiants au serveur.
 
-### Utilisation (Linux Debian)
+### Utilisation (Ubuntu 20.04 LTS)
 Pour utiliser ce projet, il faut :
-- Installer un serveur Apache (Apache2 version 2.4.57)
-- Installer une base de données MariaDB (MariaDB version 15.1)
+- Installer Apache, PHP et MariaDB
+    ```
+    sudo apt update
+    sudo apt install apache2
+    sudo apt install php libapache2-mod-php php-mysql
+    sudo apt install mariadb-server
+    ```
 - Créer une base de données et une table pour stocker les utilisateurs
     La table doit être de la forme :
     ```

@@ -110,3 +110,17 @@
     display: flex;
     justify-content: center;
 }
+
+.logout-button input[type="button"]
+{
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    background-color: #f44336;
+    color: white;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+}

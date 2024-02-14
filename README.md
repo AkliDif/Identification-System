@@ -25,5 +25,21 @@ Pour utiliser ce projet, il faut :
     );
     ```
 - Configurer le serveur Apache pour utiliser le protocole HTTPS (voir [ici](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-debian-10))
-- Placer le fichier `index.php` dans le dossier `/var/www/html` du serveur Apache
+- Modifier la directive dans le fichier `/etc/apache2/apache2.conf` de :
+    ```
+    <Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+    </Directory>
+    ```
+    à :
+    ```
+    <Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+    ```
+- Placer le fichier index.php dans le dossier /var/www/html du serveur Apache
 - Modifier le mot de passe et l'utilisateur de la base de données dans le fichier `/var/www/html/inc/init.inc.php`

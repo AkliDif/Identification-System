@@ -1,13 +1,10 @@
 <?php
 
-require_once('init.inc.php');
-
 function add_user($username, $password, $password_conf) {
 
     if (empty($username) || empty($password) || empty($password_conf))
     {
         $_SESSION['input_data_error'] = 'Please fill in all the fields.';
-        // header('Location: ../registration.php');
         return;
     }
 
@@ -20,7 +17,6 @@ function add_user($username, $password, $password_conf) {
     if (empty($username) || empty($password) || empty($password_conf))
     {
         $_SESSION['input_data_error'] = 'The username and the passwords are required.';
-        // header('Location: ../registration.php');
         return;
     }
     global $pdo;
@@ -40,16 +36,12 @@ function add_user($username, $password, $password_conf) {
 
         $_SESSION['username_error'] = 'The username is already used.';
         echo "The username is already used.";
-        echo $username;
-        // header('Location: ../registration.php');
         return 1; // user already exists
     }
 
     if ($password !== $password_conf )
     {   
         $_SESSION['password_error'] = 'The passwords do not match.';
-        // adding a delay to see the error message
-        // header('Location: ../registration.php');
         return 2; // password and password_conf are different
     }
 
@@ -77,8 +69,10 @@ function connect_user($username, $password)
     $statement->execute();
     $user = $statement->fetch();
     $statement->closeCursor();
+
     if ($user && password_verify($password, $user['password']))
     {
+        session_regenerate_id(true); // to prevent session fixation attacks 
         $_SESSION['username'] = $username;
         header('Location: ../connected.php');
     }

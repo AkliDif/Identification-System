@@ -1,4 +1,10 @@
-<?php require_once('./inc/init.inc.php'); ?>
+<?php
+    if (file_exists("inc/init.inc.php")) {
+        require_once("inc/init.inc.php");
+    } else {
+        die("Error: init.inc.php not found");
+    }
+?>
 <?php
     
     if (isset($_GET['action']) && $_GET['action'] == 'deconnexion') {
@@ -17,6 +23,9 @@
     }
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+        $_POST['username'] = addslashes($_POST['username']);
+        $_POST['password'] = addslashes($_POST['password']);
+
         if (!isset($_POST['_token']) || $_POST['_token'] !== $_SESSION['_token']) {
             die('Token invalide');
         }
@@ -27,7 +36,13 @@
     $_SESSION['_token'] = bin2hex(random_bytes(32));
 ?>
 
-<?php require_once('./inc/haut.inc.php'); ?>
+<?php
+    if (file_exists("inc/haut.inc.php")) {
+        require_once("inc/haut.inc.php");
+    } else {
+        die("Error: inc/haut.inc.php not found");
+    }
+?>
     <div class="form">
 
         <!-- load the logo with php script -->
@@ -62,4 +77,10 @@
                 ?>">
         </form>
     </div>
-<?php require_once('./inc/bas.inc.php'); ?>
+<?php
+    if (file_exists("inc/bas.inc.php")) {
+        require_once("inc/bas.inc.php");
+    } else {
+        die("Error: inc/bas.inc.php not found");
+    }
+?>

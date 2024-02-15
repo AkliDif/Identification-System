@@ -48,3 +48,19 @@ Pour utiliser ce projet, il faut :
     ```
 - Placer le fichier index.php dans le dossier /var/www/html du serveur Apache
 - Modifier le mot de passe et l'utilisateur de la base de données dans le fichier `/var/www/html/inc/init.inc.php`
+- Modifier la ligne 6 du fichier `/var/www/html/inc/init.inc.php` de :
+    ```
+    ini_set('error_log', 'error.log');
+    ```
+    pour mettre le chemin vers fichier où les erreurs seront stockées.
+- Ajouter dans le fichier apache2.conf la directive :
+    ```
+    SetEnv DB_USER your_database_user
+    SetEnv DB_PASS your_database_password
+    ```
+    où `your_database_user` est le nom de l'utilisateur de la base de données et `your_database_password` est le mot de passe de l'utilisateur de la base de données.
+- Redémarrer le serveur Apache
+    ```
+    sudo systemctl restart apache2
+    ```
+- Accéder au site Web en tapant `https://localhost` dans un navigateur Web
